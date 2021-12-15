@@ -27,12 +27,19 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'mysql:mysql-connector-java'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    /** DEV **/
+    runtimeOnly 'com.h2database:h2'
+    /** PRODUCTION **/
+    runtimeOnly 'mysql:mysql-connector-java'
+    /** FOR TEST **/
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.7.0")
+    testImplementation('org.junit.jupiter:junit-jupiter:5.7.0')
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.0")
 }
 
 dependencyManagement {
