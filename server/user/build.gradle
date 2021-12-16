@@ -32,6 +32,8 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    /** JWT **/
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
     /** DEV **/
     runtimeOnly 'com.h2database:h2'
     /** PRODUCTION **/
