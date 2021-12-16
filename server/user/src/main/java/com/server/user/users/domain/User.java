@@ -41,7 +41,7 @@ public class User extends BaseTimeEntity {
     ) {
         this.id = id;
         this.email = email;
-        this.password = encrypt(password);
+        this.password = password;
         this. nickname = nickname;
         this.userRole = userRole;
     }
@@ -52,7 +52,7 @@ public class User extends BaseTimeEntity {
      * @return
      */
     public boolean compare(String comparePassword) {
-        if (password.equals(encrypt(comparePassword))) {
+        if (password.equals(comparePassword)) {
             return true;
         }
         return false;

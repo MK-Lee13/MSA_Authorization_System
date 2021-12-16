@@ -15,7 +15,7 @@ public class EncryptorSha512 {
                     new BigInteger(1, messageDigest.digest())
             );
         } catch(Exception e) {
-             // TODO: 임시 로직 추후에 Exception 처리 필요
+             // TODO : 임시 로직 추후에 Exception 처리 필요
             e.printStackTrace();
         }
         return encryptPassword;

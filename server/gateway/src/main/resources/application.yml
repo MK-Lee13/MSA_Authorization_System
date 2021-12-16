@@ -21,3 +21,9 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=api/v1/users/**
+          filters:
+            - RewritePath=api/v1/users/info
+            - AuthorizationFilter
+
+secret:
+  key: test_with_me
