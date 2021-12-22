@@ -20,9 +20,16 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=api/v1/users/**
+            - Path=/api/v1/users/sign/up
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/users/sign/in
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/users/info
           filters:
-            - RewritePath=api/v1/users/info
             - AuthorizationFilter
 
 secret:

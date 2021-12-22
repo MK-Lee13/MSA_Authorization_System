@@ -1,10 +1,6 @@
 package com.server.gateway.common.filter;
 
-import com.server.gateway.common.api.UserServiceFeignClient;
-import com.server.gateway.common.dto.UserResponseDto;
 import com.server.gateway.common.security.JwtTokenProvider;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -21,18 +17,12 @@ import java.util.Objects;
 
 @Component
 public class AuthorizationFilter extends AbstractGatewayFilterFactory<AuthorizationFilter.Config> {
-//    private UserServiceFeignClient userServiceFeignClient;
     private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public AuthorizationFilter(
-//            UserServiceFeignClient userServiceFeignClient,
-            JwtTokenProvider jwtTokenProvider
-    ) {
+    public AuthorizationFilter(JwtTokenProvider jwtTokenProvider) {
         super(Config.class);
-//        this.userServiceFeignClient = userServiceFeignClient;
         this.jwtTokenProvider = jwtTokenProvider;
-
     }
 
     @Override
@@ -54,22 +44,10 @@ public class AuthorizationFilter extends AbstractGatewayFilterFactory<Authorizat
              * token 사용자 검색
              */
             String tokenEmail = jwtTokenProvider.getUserEmail(accessToken);
-            // TODO : 추후에 Null 제거합시다
-            UserResponseDto userResponseDto = null;
-//            try {
-//                userResponseDto = userServiceFeignClient.getUser(tokenEmail);
-//            } catch(Exception e) {
-//                // TODO : 추후에 Exception 정의해서 만들어야합니다
-//                return handleUnAuthorized(exchange); // 401 Error
-//            }
-//
-//            /**
-//             * token 사용자 검증
-//             */
-//            if (userResponseDto == null) {
-//                // TODO : 추후에 Exception 정의해서 만들어야합니다
-//                return handleUnAuthorized(exchange); // 401 Error
-//            }
+
+            if (tokenEmail == null) {
+                return handleUnAuthorized(exchange);
+            }
 
             return chain.filter(exchange);
         }));
